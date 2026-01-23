@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background-image: url(/images/login.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cart{
+   width: 40px;
+  margin-right: 20px;
+  position: relative;
+}
+.header{
+  position: absolute;
+  top: 10px;
+  
+}
+.header span{
+  font-size: 20px;
+  transition: 0.2s;
+}
+.header span:hover{
+  color: blue;
+  font-size: 25px;
+}
+.form-log {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  background-color: lightblue;
+  border-radius: 15px;
+  border: 3px solid black;
+  margin: auto;
+}
+.form-log input {
+  margin-bottom: 5px;
+}
+
+/* Center form contents and align labels beside inputs */
+.form-log {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px black;
+}
+.i-group {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between; /* center the pair horizontally */
+  margin-bottom: 10px;
+}
+.i-group label {
+  font-size: 1rem;
+}
+
+@media (max-width: 576px) {
+  .i-group label {
+    font-size: 0.9rem;
+  }
+}
+
+.i-group input:not([type="submit"]) {
+  padding: 5px;
+  border-radius: 12px;
+  border: 3px solid black;
+  transition: 0.4s;
+  font-size: 0.9rem; /* Slightly smaller input text */
+}
+
+@media (max-width: 576px) {
+  /* Adjust title size on mobile if needed */
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+input:not([type="submit"]):hover {
+  box-shadow: 5px 5px 5px gray;
+}
+input[type="submit"] {
+  transition: 0.3s;
+  border: 2px solid black;
+}
+input[type="submit"]:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+  box-shadow: 2px 4px 6px cadetblue;
+  border: 2px solid blue;
+}

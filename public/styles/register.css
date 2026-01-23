@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #870f94 50%,
+    #764ba2 75%,
+    #667eea 100%
+  );
+}
+.container-fluid {
+  position: relative;
+}
+.cart {
+  width: 40px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.header span {
+  font-size: 20px;
+  transition: 0.2s;
+}
+.header span:hover {
+  font-size: 25px;
+}
+.form-reg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 3px solid black;
+  margin: auto;
+  position: relative;
+  display: none;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px black;
+}
+.form-reg input {
+  margin-bottom: 5px;
+}
+.i-group {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between; /* center the pair horizontally */
+  margin-bottom: 10px;
+}
+.i-group label {
+  font-size: 1rem;
+}
+
+@media (max-width: 576px) {
+  .i-group label {
+    font-size: 0.9rem;
+  }
+}
+
+.i-group input:not([type="submit"]) {
+  padding: 5px;
+  border-radius: 12px;
+  border: 3px solid black;
+  transition: 0.4s;
+  font-size: 0.9rem; /* Slightly smaller input text */
+}
+
+@media (max-width: 576px) {
+  /* Adjust title size on mobile if needed */
+  .form-reg h3 {
+    font-size: 1.5rem;
+  }
+  .container-fluid .form-reg {
+    padding: 2px;
+  }
+  .header span {
+    font-size: 18px;
+  }
+  .header img {
+    width: 30px;
+  }
+  .form-reg * {
+  }
+}
+
+input:not([type="submit"]):hover {
+  box-shadow: 5px 5px 5px gray;
+}
+input[type="submit"] {
+  transition: 0.3s;
+  background-color: black;
+  border: none;
+  color: white;
+}
+input[type="submit"]:hover {
+  transform: translateY(-5px);
+  transition: 0.2s;
+  box-shadow: 2px 4px 6px rgb(156, 160, 95);
+  background-color: white;
+}
