@@ -11,25 +11,28 @@ body {
   background-position: center;
 }
 
-.cart{
-   width: 40px;
+.cart {
+  width: 40px;
   margin-right: 20px;
   position: relative;
 }
-.header{
+.header {
   position: absolute;
   top: 10px;
-  
 }
-.header span{
+.header span {
   font-size: 20px;
   transition: 0.2s;
 }
-.header span:hover{
+.header span:hover {
   color: blue;
   font-size: 25px;
 }
 .form-log {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px black;
   width: 100%;
   max-width: 400px;
   height: auto;
@@ -43,12 +46,7 @@ body {
 }
 
 /* Center form contents and align labels beside inputs */
-.form-log {
-  position: relative;
-  display: none;
-  flex-direction: column;
-  box-shadow: 5px 5px 10px black;
-}
+
 .i-group {
   height: fit-content;
   display: flex;

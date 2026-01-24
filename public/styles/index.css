@@ -13,21 +13,10 @@ body {
     #667eea 100%
   );
   background-size: 400% 400%;
-  animation: gradientShift 25s ease-in-out infinite reverse;
-  height: 100vh;
+  animation: gradientShift 10s ease-in-out infinite reverse;
+  height: fit-content;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 
 nav {
   background-size: 400% 400%;
@@ -197,8 +186,64 @@ nav .btn-register:hover {
 .section .card i:nth-child(1) {
   color: rgb(11, 206, 11);
 }
+/*############################## The Products Section ##############################*/
+.mobile .card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.mobile img {
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+.mobile .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.mobile h2{
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+.mobile p{
+  font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+}
+.laptop{
+  margin-top: 5rem;
+}
+.laptop .card{
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.laptop .card:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.laptop img{
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+.laptop h2{
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+.laptop p{
+  font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+}
 
-/* Footer Styles */
+/************************************ Footer Styles ************************************/
 .footer {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
@@ -240,4 +285,28 @@ nav .btn-register:hover {
     transparent
   );
   border: none;
+}
+/*# ********************************* Animation Styles ************************************/
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
