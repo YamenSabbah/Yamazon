@@ -17,7 +17,6 @@ body {
   height: fit-content;
 }
 
-
 nav {
   background-size: 400% 400%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -190,14 +189,13 @@ nav .btn-register:hover {
 .mobile .card {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  padding: 20px;
   color: white;
   font-weight: bold;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+    0.4s,
+    box-shadow 0.4s;
 }
 .mobile img {
   animation: float 4s ease-in-out infinite;
@@ -206,43 +204,72 @@ nav .btn-register:hover {
 .mobile .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background-color: rgba(227, 236, 221, 0.4);
 }
-.mobile h2{
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+.mobile h2 {
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
 }
-.mobile p{
-  font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+.mobile p {
+  font-size: clamp(0.5rem, 2vw, 1.1rem);
 }
-.laptop{
+.laptop {
   margin-top: 5rem;
 }
-.laptop .card{
+.laptop .card {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  padding: 20px;
   color: white;
   font-weight: bold;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+    0.4s,
+    box-shadow 0.4s;
 }
-.laptop .card:hover{
+.laptop .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background-color: rgba(227, 236, 221, 0.4);
 }
-.laptop img{
+.laptop img {
   animation: float 4s ease-in-out infinite;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
 }
-.laptop h2{
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+.laptop h2 {
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
 }
-.laptop p{
-  font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+.laptop p {
+  font-size: clamp(0.5rem, 2vw, 1.1rem);
 }
-
+.headphones {
+  margin-top: 5rem;
+}
+.headphones .card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition:
+    0.4s,
+    box-shadow 0.4s;
+}
+.headphones .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background-color: rgba(227, 236, 221, 0.4);
+}
+.headphones img {
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+.headphones h2 {
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
+}
+.headphones p {
+  font-size: clamp(0.5rem, 2vw, 1.1rem);
+}
 /************************************ Footer Styles ************************************/
 .footer {
   background: rgba(255, 255, 255, 0.05);
@@ -304,7 +331,7 @@ nav .btn-register:hover {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-20px);
   }
   100% {
     transform: translateY(0px);
