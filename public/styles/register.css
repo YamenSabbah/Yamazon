@@ -102,8 +102,6 @@ body {
   .header img {
     width: 30px;
   }
-  .form-reg * {
-  }
 }
 input:not([type="submit"]):hover {
   outline: none;
