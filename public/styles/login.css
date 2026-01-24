@@ -81,7 +81,7 @@ body {
 input:not([type="submit"]):hover {
   box-shadow: 5px 5px 5px gray;
 }
-input[type="submit"] {
+input[type="submit"]{
   transition: 0.3s;
   border: 2px solid black;
 }

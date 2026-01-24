@@ -41,16 +41,10 @@ app.get("/register", async (req, res) => {
 app.post("/register", async (req, res) => {
   const reg = req.body.login;
   console.log(reg);
-  if (reg === "Login") {
-    res.render("login.ejs", {});
-  }
 });
 app.post("/login", async (req, res) => {
   const reg = req.body.register;
   console.log(reg);
-  if (reg === "Register") {
-    res.render("register.ejs", {});
-  }
 });
 
 const port = 4000;
