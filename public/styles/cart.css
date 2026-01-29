@@ -1,0 +1,43 @@
+
+body {
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #870f94 50%,
+    #764ba2 75%,
+    #667eea 100%
+  );
+}
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(33, 37, 41, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: 0.3s;
+  border-radius: 25px;
+}
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #764ba2 0%, #870f94 100%);
+  border-color: rgba(255, 255, 255, 0.5) rgb(156, 160, 95);
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+
+  .balance-display {
+    margin-right: 1rem !important;
+  }
+}

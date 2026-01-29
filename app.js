@@ -1,14 +1,17 @@
-const bodyParser = require("body-parser");
-const express = require("express");
-const path = require("path");
-const livereload = require("livereload");
-const connectLiveReload = require("connect-livereload");
+import express from "express";
+import bodyParser from "body-parser";
+import path from "path";
+import livereload from "livereload";
+import connectLiveReload from "connect-livereload";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
+import conn from "./connect.js";
 //! Live reload to refresh the page when a file changes .
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "views"));
 liveReloadServer.watch(path.join(__dirname, "public"));
-
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
     liveReloadServer.refresh("/");
@@ -17,6 +20,14 @@ liveReloadServer.server.once("connection", () => {
 app.use(connectLiveReload());
 //*---------------------------------------------------------------------------------------------------
 //*---------------------------------------------------------------------------------------------------
+let products = [];
+conn.query("select * from products inner join categories using (cat_id) ORDER BY cat_id ASC", (err, res) => {
+  if (err) {
+    console.error("Error executing query", err.stack);
+  } else {
+    products = res.rows;
+  }
+});
 
 //# Start Node js backend server .
 app.use(express.json());
@@ -36,6 +47,40 @@ app.get("/login", async (req, res) => {
 
 app.get("/register", async (req, res) => {
   res.render("register.ejs", {});
+});
+
+app.get("/main", async (req, res) => {
+  // Group products by category
+  const categoriesMap = {};
+
+  products.forEach((product) => {
+    const catId = product.cat_id;
+    if (!categoriesMap[catId]) {
+      categoriesMap[catId] = {
+        name: product.cat_name, // Make sure your DB has category names
+        products: [],
+      };
+    }
+    categoriesMap[catId].products.push({
+      id: product.prod_id,
+      name: product.prod_name,
+      price: product.price,
+      image: product.imageurl,
+      quantity: product.quantity,
+    });
+  });
+
+  // Convert map to array
+  const categories = Object.values(categoriesMap);
+  res.render("main.ejs", {
+    balance: 5000,
+    categories: categories,
+  });
+});
+
+
+app.get("/cart", async (req, res) => {
+  res.render("cart.ejs", {});
 });
 
 app.post("/register", async (req, res) => {

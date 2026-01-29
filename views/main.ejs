@@ -1,16 +1,105 @@
-<!-- !------------------- ****************  -------------------- -->
-<!-- !------------------- Main Section    -------------------- -->
-<!-- !------------------- ****************  -------------------- -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yamazon</title>
+    <title>Yamazon | Store</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="/js/JQuery.js"></script>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row"></div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+      <div class="container">
+        <div class="d-flex align-items-center mb-3 mb-md-0">
+          <a class="navbar-brand d-flex align-items-center" href="/main">
+         <i class="fas fa-shopping-cart mx-1 fs-4" style="rotate: -35deg;"></i>
+          <span class="fw-bold">Yamazon</span>
+        </a>
+        <input type="list" list="categories" id="categorySearch" class="my-1 w-25 search-input">
+        <button id="searchBtn" class="btn btn-sm btn-outline-light ms-2">
+          <i class="fas fa-search"></i>
+        </button>
+        <datalist id="categories">
+          <% categories.forEach(category => { %>
+            <option value="<%= category.name %>"></option>
+          <% }) %>
+        </datalist>
+        </div>
+        <div class="d-flex align-items-center ms-auto">
+          <div class="balance-display me-4">
+            <span class="text-danger small d-block fw-bold">Your Balance</span>
+            <span class="balance-amount text-success fw-bold">$<%= balance %></span>
+          </div>
+          
+          <button class="btn position-relative me-3 cart-btn" onclick="location.href='/cart'">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </button>
+          
+          <a href="/login" class="btn logout-btn">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Store Content -->
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h1 class="display-4 fw-bold text-white">Explore Our Store</h1>
+          <p class="text-white">Laptops, Mobiles, and Headphones at your fingertips</p>
+        </div>
+      </div>
+
+      <% categories.forEach(category => { %>
+        <section class="mb-5">
+          <div class="d-flex align-items-center mb-4">
+            <h2 class="h3 fw-bold mb-0 text-white" id="<%= category.name %>"><%= category.name %></h2>
+            <div class="category-line ms-3 flex-grow-1"></div>
+          </div>
+          
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <% category.products.forEach(product => { %>
+              <div class="col">
+                <div class="card h-100 product-card border-0 shadow-sm">
+                  <div class="card-img-container p-3">
+                    <img src="<%= product.image %>" class="card-img-top img-fluid" alt="<%= product.name %>">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title fw-bold text-white"><%= product.name %></h5>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="h4 text-white fw-bold mb-0">$<%= product.price %></span>
+                      <button class="btn add-to-cart">
+                        <i class="fas fa-plus me-1"></i> Add to Cart
+                      </button>
+                    </div>
+                    <span class="h6 fw-bold mb-0">Quantity: <%= product.quantity %></span>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </section>
+      <% }) %>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2026 Yamazon. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="/js/main.js"></script>
+
   </body>
 </html>

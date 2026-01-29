@@ -1,13 +1,16 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import pg from 'pg';
-const conn = new pg.Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'general',
-    password: 'yamen123',
-    port: 5432,
+const db = new pg.Client({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
 });
-conn.connect().then(() => {
+db.connect().then(() => {
     console.log("Connected to the database successfully.");
 }).catch(err => {
     console.error("Database connection error:", err.stack);
 });
+export default db;

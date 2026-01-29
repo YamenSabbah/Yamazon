@@ -1,8 +1,5 @@
 $(document).ready(function () {
-  $("form")
-    .css("display", "flex")
-    .hide()
-    .fadeIn(800);
+  $("form").css("display", "flex").hide().fadeIn(800);
 
   // Hamburger menu toggle
   $("#navToggle").click(function () {
@@ -15,4 +12,23 @@ $(document).ready(function () {
     $("#navToggle").removeClass("active");
     $("#navMenu").removeClass("show");
   });
+  // Search and scroll functionality
+  $("#searchBtn").click(function () {
+    const categoryName = $("#categorySearch").val().trim();
+    if (categoryName) {
+      const section = $(`#${categoryName}`);
+      if (section.length) {
+        $("html, body").animate(
+          {
+            scrollTop: section.offset().top - 80, // Offset for sticky navbar
+          },
+          800,
+        );
+      } else {
+        alert("Category not found!");
+      }
+    }
+  });
 });
+
+
