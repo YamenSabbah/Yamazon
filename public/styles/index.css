@@ -15,6 +15,7 @@ body {
   background-size: 400% 400%;
   animation: gradientShift 10s ease-in-out infinite reverse;
   height: fit-content;
+  scroll-behavior: smooth;
 }
 
 nav {

@@ -5,7 +5,8 @@
 }
 body {
   font-family: sans-serif;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
   background: linear-gradient(
     135deg,
     #667eea 0%,
@@ -14,6 +15,9 @@ body {
     #764ba2 75%,
     #667eea 100%
   );
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 .container-fluid {
   position: relative;
@@ -35,7 +39,6 @@ body {
   color: #e0e0ff;
 }
 .form-reg {
-  width: 100%;
   max-width: 400px;
   height: auto;
   background: rgba(255, 255, 255, 0.3);
@@ -50,12 +53,13 @@ body {
 }
 .form-reg input {
   margin-bottom: 5px;
+  min-width: 50%;
 }
 
 .form-reg h3 {
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
+  margin-bottom: 3px;
 }
 
 .form-reg label {
@@ -83,17 +87,10 @@ body {
   margin-bottom: 10px;
 }
 .i-group label {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
-
-@media (max-width: 576px) {
-  .i-group label {
-    font-size: 0.9rem;
-  }
-}
-
 .i-group input:not([type="submit"]) {
-  padding: 10px 12px;
+  padding: clamp(0.3rem, 2vw, 0.5rem);
   border-radius: 10px;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.9);
@@ -115,6 +112,12 @@ body {
   }
   .header img {
     width: 30px;
+  }
+  body {
+    min-height: 100vh;
+  }
+  .form-reg {
+    max-width: 270px;
   }
 }
 input:not([type="submit"]):hover {

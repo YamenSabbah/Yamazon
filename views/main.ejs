@@ -45,7 +45,7 @@
             </span>
           </button>
           
-          <a href="/login" class="btn logout-btn">
+          <a href="/" class="btn logout-btn">
             <i class="fas fa-sign-out-alt me-1"></i> Logout
           </a>
         </div>
@@ -79,9 +79,11 @@
                     <h5 class="card-title fw-bold text-white"><%= product.name %></h5>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                       <span class="h4 text-white fw-bold mb-0">$<%= product.price %></span>
-                      <button class="btn add-to-cart">
+                      <form action="/addToCart">
+                      <button class="btn add-to-cart" type="submit">
                         <i class="fas fa-plus me-1"></i> Add to Cart
                       </button>
+                    </form>
                     </div>
                     <span class="h6 fw-bold mb-0">Quantity: <%= product.quantity %></span>
                   </div>

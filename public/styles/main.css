@@ -17,6 +17,7 @@ body {
     #764ba2 75%,
     #667eea 100%
   );
+  scroll-behavior: smooth;
 }
 
 /* Navbar styles */

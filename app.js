@@ -20,14 +20,6 @@ liveReloadServer.server.once("connection", () => {
 app.use(connectLiveReload());
 //*---------------------------------------------------------------------------------------------------
 //*---------------------------------------------------------------------------------------------------
-let products = [];
-conn.query("select * from products inner join categories using (cat_id) ORDER BY cat_id ASC", (err, res) => {
-  if (err) {
-    console.error("Error executing query", err.stack);
-  } else {
-    products = res.rows;
-  }
-});
 
 //# Start Node js backend server .
 app.use(express.json());
@@ -49,8 +41,23 @@ app.get("/register", async (req, res) => {
   res.render("register.ejs", {});
 });
 
+app.post("/register", async (req, res) => {
+  const { firstName , lastName , email, password } = req.body;
+  console.log(firstName, lastName, email, password);
+
+
+});
+app.post("/login", async (req, res) => {});
+
+
+//^ -----------------    Main Store Page <-------------------------------
 app.get("/main", async (req, res) => {
-  // Group products by category
+  const result = await conn.query(
+    `select * from products inner join categories using (cat_id) ORDER BY cat_id ASC`,
+  );
+  let products = [];
+  products = result.rows;
+  //let Group products by category
   const categoriesMap = {};
 
   products.forEach((product) => {
@@ -78,18 +85,8 @@ app.get("/main", async (req, res) => {
   });
 });
 
-
 app.get("/cart", async (req, res) => {
   res.render("cart.ejs", {});
-});
-
-app.post("/register", async (req, res) => {
-  const reg = req.body.login;
-  console.log(reg);
-});
-app.post("/login", async (req, res) => {
-  const reg = req.body.register;
-  console.log(reg);
 });
 
 const port = 4000;

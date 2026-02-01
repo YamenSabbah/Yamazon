@@ -15,7 +15,7 @@
   <body>
     <div class="container-fluid">
       <div class="row d-flex justify-content-center align-items-center">
-        <div class="header d-flex align-items-center">
+        <div class="header d-flex align-items-center mb-2 mb-lg-1">
           <i
             class="fa-solid fa-cart-shopping mx-2 my-2 fs-2"
             style="color: white; rotate: -15deg"
@@ -25,13 +25,13 @@
           >
         </div>
         <div class="col-lg-12">
-          <form action="/register" method="POST" class="form-reg p-3 p-md-4">
+          <form action="/register" method="POST" class="form-reg p-3 p-lg-4">
             <h3 class="text-center fw-bold">Register</h3>
             <div class="i-group d-flex flex-column">
               <label for="fname"><b>First Name</b></label>
               <input
                 type="text"
-                name="name"
+                name="firstName"
                 id="fname"
                 placeholder="firstName"
                 class="fw-bold"
@@ -39,7 +39,7 @@
               <label for="lname"><b>Last Name</b></label>
               <input
                 type="text"
-                name="name"
+                name="lastName"
                 id="lname"
                 placeholder="lastName"
                 class="fw-bold"
@@ -53,13 +53,26 @@
                 class="fw-bold"
               />
               <label for="password"><b>Password</b></label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                class="fw-bold"
-              />
+              <div class="position-relative">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  class="fw-bold form-control pe-5"
+                />
+                <i
+                  id="togglePassword"
+                  class="fa-solid fa-eye"
+                  style="
+                    position: absolute;
+                    right: 12px;
+                    top: 50%;
+                    transform: translateY(-55%);
+                    cursor: pointer;
+                  "
+                ></i>
+              </div>
             </div>
             <div class="d-flex flex-column">
               <input
@@ -69,14 +82,28 @@
               />
 
               <p class="text-center mt-1"><b>have an account ?</b></p>
-              <a href="/login" class="btn btn-lg w-100 fw-bold rounded-pill"
-                >Login</a
-              >
             </div>
+            <a href="/login" class="btn btn-lg w-100 fw-bold rounded-pill"
+              >Login</a
+            >
           </form>
         </div>
       </div>
     </div>
     <script src="/js/main.js"></script>
+    <script>
+      (function () {
+        var toggle = document.getElementById("togglePassword");
+        var pwd = document.getElementById("password");
+        if (!toggle || !pwd) return;
+        toggle.addEventListener("click", function () {
+          var type =
+            pwd.getAttribute("type") === "password" ? "text" : "password";
+          pwd.setAttribute("type", type);
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+      })();
+    </script>
   </body>
 </html>
