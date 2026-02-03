@@ -29,6 +29,70 @@ $(document).ready(function () {
       }
     }
   });
+
+  // --- Registration Popup & Validation Logic ---
+
+  function showPopup(message, type = "error") {
+    const $popup = $("#Popup");
+    if (!$popup.length) return;
+
+    // Set text and theme
+    $popup.text(message);
+    $popup.removeClass("success error").addClass(type);
+
+    // Add icon if possible (optional enhancement)
+    const icon = type === "success" ? "check-circle" : "exclamation-circle";
+    $popup.prepend(`<i class="fa-solid fa-${icon} me-2"></i>`);
+
+    // Show popup
+    $popup.addClass("show");
+
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+      $popup.removeClass("show");
+    }, 4000);
+  }
+
+  // Handle URL parameters for server-side messages
+  const urlParams = new URLSearchParams(window.location.search);
+  const messageParam = urlParams.get("message");
+
+  if (messageParam === "success") {
+    showPopup("Successfully registered! You can now login.", "success");
+  } else if (messageParam === "empty") {
+    showPopup("Please fill all fields.", "error");
+  } else if (messageParam === "exists") {
+    showPopup("This email is already registered.", "error");
+  }else if (messageParam === "notfound") {
+    showPopup("wrong password or email", "error");
+  }
+
+  // Client-side validation on form submit
+  $(".form-reg , .form-log").on("submit", function (e) {
+    const inputs = $(this).find(
+      'input[type="text"], input[type="email"], input[type="password"]',
+    );
+    let allFilled = true;
+
+    inputs.each(function () {
+      if ($(this).val().trim() === "") {
+        allFilled = false;
+        $(this).css("border-color", "red");
+      } else {
+        $(this).css("border-color", "black");
+      }
+    });
+
+    if (!allFilled) {
+      e.preventDefault();
+      showPopup("Please fill all required fields.", "error");
+    }
+  });
+
+  // Clear red border on input
+  $(".form-reg input").on("input", function () {
+    if ($(this).val().trim() !== "") {
+      $(this).css("border-color", "black");
+    }
+  });
 });
-
-
