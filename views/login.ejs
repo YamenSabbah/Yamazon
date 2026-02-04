@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/login.css" />
     <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <script src="/js/JQuery.js"></script>
     <title>Login Page</title>
   </head>
@@ -14,9 +18,12 @@
         class="row d-flex justify-content-center align-items-center min-vh-100 p-3"
       >
         <div class="header d-flex align-items-center">
-          <img src="/images/cart.png" class="cart" alt="" />
+          <i
+            class="fas fa-shopping-cart mx-2 my-2 fs-2 text-white"
+            style="rotate: -15deg"
+          ></i>
           <a href="/" class="navbar-brand fw-bold fs-3"
-            ><span class="fw-bold">Yamazon</span></a
+            ><span class="fw-bold text-white fs-4">Yamazon</span></a
           >
         </div>
         <div class="col-lg-12">
@@ -31,6 +38,11 @@
                 placeholder="Email"
                 class="fw-bold"
               />
+              <span
+                id="email-err"
+                class="text-danger fw-bold"
+                style="display: none; font-size: 0.8rem"
+              ></span>
               <label for="password"><b>Password</b></label>
               <input
                 type="password"
@@ -46,9 +58,7 @@
               />
             </div>
             <p class="text-center mt-3"><b>don't have an account ?</b></p>
-            <a
-              href="/register"
-              class="btn btn-lg w-100 fw-bold rounded-pill"
+            <a href="/register" class="btn btn-lg w-100 fw-bold rounded-pill"
               >Register</a
             >
           </form>
@@ -56,6 +66,7 @@
       </div>
     </div>
     <div id="Popup" class="login-popup">Please fill all fields</div>
+    <script src="/js/function.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>

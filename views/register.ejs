@@ -20,7 +20,7 @@
             class="fa-solid fa-cart-shopping mx-2 my-2 fs-2"
             style="color: white; rotate: -15deg"
           ></i>
-          <a href="/" class="navbar-brand fw-bold fs-3"
+          <a href="/" class="navbar-brand fw-bold fs-2"
             ><span class="fw-bold">Yamazon</span></a
           >
         </div>
@@ -35,6 +35,8 @@
                 id="fname"
                 placeholder="firstName"
                 class="fw-bold"
+                minlength="3"
+                maxlength="20"
               />
               <label for="lname"><b>Last Name</b></label>
               <input
@@ -43,6 +45,8 @@
                 id="lname"
                 placeholder="lastName"
                 class="fw-bold"
+                minlength="3"
+                maxlength="20"
               />
               <label for="email"><b>Email</b></label>
               <input
@@ -52,6 +56,11 @@
                 placeholder="Email"
                 class="fw-bold"
               />
+              <span
+                id="email-err"
+                class="text-danger fw-bold"
+                style="display: none; font-size: 0.8rem"
+              ></span>
               <label for="password"><b>Password</b></label>
               <div class="position-relative">
                 <input
@@ -60,6 +69,8 @@
                   id="password"
                   placeholder="Password"
                   class="fw-bold form-control pe-5"
+                  minlength="2"
+                  maxlength="30"
                 />
                 <i
                   id="togglePassword"
@@ -92,6 +103,7 @@
     </div>
     <div id="Popup" class="registration-popup">Please fill all fields</div>
 
+    <script src="/js/function.js"></script>
     <script src="/js/main.js"></script>
     <script>
       (function () {
