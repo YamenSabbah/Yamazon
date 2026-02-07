@@ -117,7 +117,7 @@ input[type="list"] {
   transition: 0.3s;
   border-radius: 25px;
 }
-.logout-btn:hover{
+.logout-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   background: linear-gradient(135deg, #764ba2 0%, #870f94 100%);
@@ -131,6 +131,17 @@ input[type="list"] {
 
   .balance-display {
     margin-right: 1rem !important;
+  }
+
+  .navbar-collapse {
+    background-color: rgba(33, 37, 41, 0.95);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+  }
+
+  .search-input {
+    max-width: 100% !important;
   }
 }
 .productAdd-popup {

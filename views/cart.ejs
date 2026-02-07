@@ -46,25 +46,150 @@
                 <i class="fa-solid fa-house mx-1"></i>Home</a
               >
             </li>
-            <li class="nav-item text-center">
-              <a href="/login" class="btn btn-outline-light logout-btn ms-lg-3">
-                <i class="fas fa-sign-out-alt me-1"></i> Logout
-              </a>
+            <li class="nav-item text-center text-white ms-lg-3 my-3 my-lg-0">
+              <i class="fas fa-user me-1"></i> <%= user.first_name %> <%= user.last_name %>
+            </li>
+            <li class="nav-item text-center text-white ms-lg-3 my-3 my-lg-0">
+             <p class="fw-bold balance-amount mt-0 mt-md-3" style="color: lime">Balance: $<%= balance %></p>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-12 text-center my-5">
+        <div class="col-12 text-center my-4">
           <h1 class="display-4 fw-bold text-white">Your Cart</h1>
           <p class="text-white">Review your selected items</p>
+          <p class="fw-bold fs-5 total-price" style="color: red;">Total: $<%= totalPrice %></p>
+          <form action="/checkout" method="post" class="d-flex justify-content-center">
+            <button type="submit" class="checkout-btn btn rounded-pill mt-3 px-4 border border-white shadow-lg <%= cart.length > 0 ? '' : 'd-none' %>">Checkout</>
+          </form>
         </div>
       </div>
-      <div class=""></div>
+      <!-- ? -------------------------- Users Cart Items ---------------->
+      <!-- ? -------------------------- ---------------- ---------------->
+      <div id="cartItemsContainer">
+        <% if (cart.length > 0) { %>
+          <% cart.forEach(item => { %>
+            <div id="cart-item-<%= item.prod_id %>" class="row text-center cart-items mb-3 align-items-center">
+              <div class="col-12 col-md-8">
+                <div class="d-flex align-items-center flex-column flex-lg-row my-1 p-2">
+                  <div class="item-image-container mb-3 mb-lg-0">
+                    <img
+                      src="<%= item.imageurl %>"
+                      class="img-fluid"
+                      style="max-width: 150px;"
+                      alt="<%= item.prod_name %>"
+                    />
+                  </div>
+                  <div class="ms-lg-4 text-center text-lg-start">
+                    <p class="fw-bold fs-4 item-name mb-1"><%= item.prod_name %></p>
+                    <div class="d-flex flex-column align-items-center align-items-lg-start">
+                      <p class="fw-bold item-price text-muted mb-1">price : $<%= item.price %></p>
+                      <p class="fw-bold item-quantity text-muted mb-0">quantity : <%= item.cart_quantity %></p>
+                      <p class="fw-bold item-quantity text-muted mb-0">total : $<%= item.cart_quantity * item.price %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 mt-3 mt-md-0">
+                <div class="d-flex align-items-center justify-content-center">
+                  <form action="/cart/delete-item" method="post">
+                    <button type="button" data-product-id="<%= item.prod_id %>" data-cart-quantity="<%= item.cart_quantity %>" data-product-price="<%= item.price %>" data-balance="<%= balance %>" class="btn btn-danger rounded-pill px-4 delete-item">
+                      <i class="fas fa-trash-alt me-2"></i>Delete 
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="row text-center">
+            <div class="col-12 py-5">
+              <h3 class="text-white opacity-75">Your cart is empty</h3>
+              <a href="/main" class="btn btn-outline-light rounded-pill mt-3 px-4">Continue Shopping</a>
+            </div>
+          </div>
+        <% } %>
+      </div>
+      <div id="Popup" class="productDelete-popup my-5 my-md-0"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+      $(".delete-item").click(async function (e) {
+        e.preventDefault();
+       
+        const productId = parseInt($(this).data("product-id"));
+        const cartQuantity = parseInt($(this).data("cart-quantity"));
+        const productPrice = parseFloat($(this).data("product-price"));
+        const balance = $(".balance-amount").text().replace("Balance: $", "");
+        const res = await fetch("/cart/delete-item", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId: productId, cartQuantity: cartQuantity, productPrice: productPrice, balance: balance }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          showPopup(data.message, "success");
+          // Update balance in UI
+          $(".balance-amount").text("Balance: $" + data.newBalance);
+          // Update total price in UI
+          $(".total-price").text("Total: $" + data.totalPrice);
+          
+          // Dynamically remove the item row
+          $(`#cart-item-${productId}`).fadeOut(50, function() {
+            $(this).remove();
+            
+            // Check if cart is now empty
+            if ($(".cart-items").length === 0) {
+              $(".checkout-btn").addClass("d-none");
+              $("#cartItemsContainer").html(`
+                <div class="row text-center">
+                  <div class="col-12 py-5">
+                    <h3 class="text-white opacity-75">Your cart is empty</h3>
+                    <a href="/main" class="btn btn-outline-light rounded-pill mt-3 px-4">Continue Shopping</a>
+                  </div>
+                </div>
+              `);
+            }
+          });
+        } else {
+          showPopup(data.message, "error");
+        }
+      });
+      $(".checkout-btn").click(async function (e) {
+        e.preventDefault();
+        const res = await fetch("/cart/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({})
+        })
+        const data = await res.json();  
+        if (data.success) {
+        sessionStorage.setItem("popupMessage", data.message);
+        sessionStorage.setItem("popupType", "success");
+        window.location.href = "/cart";
+        } else {
+          showPopup(data.message, "error");
+        }
+      })
+      document.addEventListener("DOMContentLoaded", () => {
+        const message = sessionStorage.getItem("popupMessage");
+        const type = sessionStorage.getItem("popupType");
+
+        if (message) {
+          showPopup(message, type);
+          sessionStorage.removeItem("popupMessage");
+          sessionStorage.removeItem("popupType");
+        }
+      });
+      
+    </script>
   </body>
 </html>

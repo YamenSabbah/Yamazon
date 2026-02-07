@@ -11,7 +11,7 @@
     <script src="/js/JQuery.js"></script>
   </head>
   <body>
-    <!-- Navbar -->
+    <!--!---------------------------- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
       <div class="container">
         <div class="d-flex align-items-center mb-3 mb-md-0">
@@ -37,17 +37,22 @@
           
           <a href="/cart" class="btn position-relative me-3 cart-btn">
             <i class="fas fa-shopping-cart"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              0
+            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <%= cartCount %>
             </span>
           </a>
+          
+          <div class="user-name me-3 text-white">
+            <i class="fas fa-user me-2"></i>
+            <span class="fw-bold"><%= user.first_name %> <%= user.last_name %></span>
+          </div>
           
           <a href="/logout" class="btn logout-btn">
             <i class="fas fa-sign-out-alt me-1"></i> Logout
           </a>
         </div>
       </div>
-    </nav>
+    </nav><!--! ------------------ end of navbar -->
     <div class="container my-5">
       <div class="row">
         <div class="col-12 text-center mb-5">
@@ -72,12 +77,14 @@
                     <h5 class="card-title fw-bold text-white"><%= product.name %></h5>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                       <span class="h4 text-white fw-bold mb-0">$<%= product.price %></span>
-                        <input type="hidden" name="productId" value="<%= product.id %>">
-                        <button class="btn add-to-cart" type="button">
+                      <form action="/addToCart" method="POST">
+                        <!-- <input type="hidden" name="productId" value="<%= product.id %>"> -->
+                        <button class="btn add-to-cart" type="button" data-product-id="<%= product.id %>" data-product-price="<%= product.price %>" data-balance="<%= balance %>" data-product-quantity="<%= product.quantity %>">
                           <i class="fas fa-plus me-1"></i> Add to Cart
                         </button>
+                      </form>
                     </div>
-                    <span class="h6 fw-bold mb-0">Quantity: <%= product.quantity %></span>
+                    <span class="h6 fw-bold mb-0">Quantity: <span class="prod-qty" data-product-id="<%= product.id %>"><%= product.quantity %></span></span>
                   </div>
                 </div>
               </div>
@@ -93,6 +100,35 @@
       </div>
     </footer>
     <script src="/js/main.js"></script>
-
+    <script>
+      $(".add-to-cart").click(async function (e) {
+        e.preventDefault();
+        const productId = $(this).data("product-id");
+        const productPrice = $(this).data("product-price");
+        const balance = $(".balance-amount").text().replace("$", "");
+        const productQuantity = $(".prod-qty[data-product-id='" + productId + "']").text();
+        const res = await fetch("/addToCart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId: productId, productPrice: productPrice, balance: balance, productQuantity: productQuantity }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          showPopup(data.message, "success");
+          // Update balance in UI
+          console.log(data.newBalance);
+          $(".balance-amount").text("$" + data.newBalance);
+          // // Update quantity for this product in UI
+          $(`.prod-qty[data-product-id="${data.productId}"]`).text(data.newQuantity);
+          // Update cart count
+          $(".cart-count").text(data.cartCount);
+        } else {
+          showPopup(data.message, "error");
+        }
+      });
+    </script>
+   
   </body>
 </html>

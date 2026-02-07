@@ -1,3 +1,24 @@
+const showPopup = (message, type = "error") => {
+  const $popup = $("#Popup");
+  if (!$popup.length) return;
+
+  // Set text and theme
+  $popup.text(message);
+  $popup.removeClass("success error").addClass(type);
+
+  // Add icon if possible (optional enhancement)
+  const icon = type === "success" ? "check-circle" : "exclamation-circle";
+  $popup.prepend(`<i class="fa-solid fa-${icon} me-2"></i>`);
+
+  // Show popup
+  $popup.addClass("show");
+
+  // Auto-hide after 4 seconds
+  setTimeout(() => {
+    $popup.removeClass("show");
+  }, 1200);
+};
+
 $(document).ready(function () {
   $("form").css("display", "flex").hide().fadeIn(800);
 
@@ -32,27 +53,6 @@ $(document).ready(function () {
 
   // --- Registration Popup & Validation Logic ---
 
-  function showPopup(message, type = "error") {
-    const $popup = $("#Popup");
-    if (!$popup.length) return;
-
-    // Set text and theme
-    $popup.text(message);
-    $popup.removeClass("success error").addClass(type);
-
-    // Add icon if possible (optional enhancement)
-    const icon = type === "success" ? "check-circle" : "exclamation-circle";
-    $popup.prepend(`<i class="fa-solid fa-${icon} me-2"></i>`);
-
-    // Show popup
-    $popup.addClass("show");
-
-    // Auto-hide after 4 seconds
-    setTimeout(() => {
-      $popup.removeClass("show");
-    }, 4000);
-  }
-
   // Handle URL parameters for server-side messages
   const urlParams = new URLSearchParams(window.location.search);
   const messageParam = urlParams.get("message");
@@ -67,10 +67,6 @@ $(document).ready(function () {
     showPopup("wrong password or email", "error");
   } else if (messageParam === "invalid") {
     showPopup("Please enter a valid email address.", "error");
-  } else if (messageParam === "notenough") {
-    showPopup("Not enough balance", "error");
-  } else if (messageParam === "successAdded") {
-    showPopup("Product added to cart", "success");
   }
 
   // Client-side validation on form submit
