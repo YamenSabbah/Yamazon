@@ -27,7 +27,9 @@ $(document).ready(function () {
     $(this).toggleClass("active");
     $("#navMenu").toggleClass("show");
   });
-
+$(".navbar-toggler").click(function () {
+  $(".navbar-toggler").toggleClass("active");
+});
   // Close menu when clicking on a link
   $("#navMenu a").click(function () {
     $("#navToggle").removeClass("active");

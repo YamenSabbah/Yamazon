@@ -69,12 +69,19 @@ router.post("/register", async (req, res) => {
 });
 
 //& -----------------    Logout Page <-------------------------------
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.clearCookie("connect.sid");
+      res.redirect("/");
+    });
   });
 });
 
