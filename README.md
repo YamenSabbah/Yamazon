@@ -73,3 +73,5 @@ The server will be running at `http://localhost:4000`.
 ## 📄 License
 
 This project is licensed under the ISC License.
+<img width="1347" height="526" alt="image" src="https://github.com/user-attachments/assets/40506911-663f-4daf-be76-d6b2b6775f3c" />
+
